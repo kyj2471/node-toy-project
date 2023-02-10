@@ -35,7 +35,8 @@ const Home = () => {
 
 const S = {
   Wrapper: styled.div`
-    background-color: red;
+    max-width: 50%;
+    margin: 0 auto;
   `
 };
 
