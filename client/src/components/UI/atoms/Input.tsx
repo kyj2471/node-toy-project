@@ -5,7 +5,12 @@ const Input = (props: any) => {
   const { value, handleChange, hint } = props;
   return (
     <>
-      <S.Input type="text" placeholder={hint} />
+      <S.Input
+        type="text"
+        placeholder={hint}
+        onChange={(e) => handleChange(e.target.value)}
+        value={value}
+      />
     </>
   );
 };

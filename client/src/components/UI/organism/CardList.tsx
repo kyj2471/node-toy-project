@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DUMMY_DATA } from 'components/dummy/data';
 import * as UI from 'components/UI';
 
 /**
@@ -11,7 +10,7 @@ const CardList = (props: any) => {
 
   return (
     <S.Wrapper>
-      {DUMMY_DATA.map((talk, index) => (
+      {list.map((talk: any, index: number) => (
         <UI.Card
           key={index}
           el={talk}

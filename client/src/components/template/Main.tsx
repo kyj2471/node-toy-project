@@ -1,46 +1,86 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Axios from 'components/libraries/axios';
 import * as UI from 'components/UI';
 
 const Home = () => {
+  const [value, setValue] = useState('');
+  const [list, setList] = useState([]);
+
   useEffect(() => {
-    handleGetIdMsg();
+    handleGetMsg();
   }, []);
 
-  // msg 받아오기
-  const handleGetIdMsg = () => {
-    Axios.get('/messages').then((res) => console.log(res));
+  // msg get
+  const handleGetMsg = () => {
+    Axios.get('/messages').then((res) => {
+      setList(res.data);
+    });
   };
 
-  // msg 등록
+  // msg post
   const handlePostMsg = () => {
     const data = {
-      text: 'new test221safddsa',
+      text: value,
       username: 'tonyK',
-      name: 'tonyK'
+      name: 'test'
     };
-    Axios.post('/messages', data).then((res) => console.log(res));
+    Axios.post('/messages', data).then((res) => {
+      if (res.status === 200) {
+        handleGetMsg();
+      }
+    });
+    handleResetValue();
   };
 
-  // msg 삭제
+  // msg delete
   const handleDelete = (id: any) => {
-    Axios.delete(`/messages/${id}`).then((res) => console.log(res));
+    Axios.delete(`/messages/${id}`).then((res) => {
+      if (res.status === 200) {
+        setList(res.data);
+      }
+    });
   };
 
-  // msg 업데이트
+  // msg update
   const handleUpdate = (id: any) => {
     const data = {
       text: 'i dont like this'
     };
-    Axios.put(`messages/${id}`, data).then((res) => console.log(res));
+    Axios.put(`messages/${id}`, data)
+      .then((res) => {
+        if (res.status === 200) {
+          setList((msg: any) =>
+            msg.map((item: any) => (item.id === res.data.id ? res.data : item))
+          );
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
+  // search input value change
+  const handleValue = (text: string) => {
+    setValue(text);
+  };
+
+  // search input value reset
+  const handleResetValue = () => {
+    setValue('');
   };
 
   return (
     <S.Wrapper>
       <UI.NavigationBar />
-      <UI.SearchEngenine handlePostMsg={handlePostMsg} />
-      <UI.CardList handleDelete={handleDelete} handleUpdate={handleUpdate} />
+      <UI.SearchEngenine
+        handlePostMsg={handlePostMsg}
+        handleChange={handleValue}
+        value={value}
+      />
+      <UI.CardList
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+        list={list}
+      />
     </S.Wrapper>
   );
 };
