@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Axios from 'components/libraries/axios';
 import * as UI from 'components/UI';
 
 const Home = () => {
+  useEffect(() => {
+    handleGetIdMsg();
+  }, []);
+
   // msg 받아오기
   const handleGetIdMsg = () => {
-    Axios.get('/messages/2').then((res) => console.log(res));
+    Axios.get('/messages').then((res) => console.log(res));
   };
 
   // msg 등록
   const handlePostMsg = () => {
-    Axios.post('/messages', 'tony').then((res) => console.log(res));
+    const data = {
+      text: 'new test221safddsa',
+      username: 'tonyK',
+      name: 'tonyK'
+    };
+    Axios.post('/messages', data).then((res) => console.log(res));
   };
 
   // msg 삭제
-  const handleDeleteMsg = () => {
-    Axios.post('/messages/1').then((res) => console.log(res));
+  const handleDelete = (id: any) => {
+    Axios.delete(`/messages/${id}`).then((res) => console.log(res));
   };
 
   // msg 업데이트
-  const handleUpdateMsg = () => {
-    Axios.put('messages/1', 'change').then((res) => console.log(res));
+  const handleUpdate = (id: any) => {
+    const data = {
+      text: 'i dont like this'
+    };
+    Axios.put(`messages/${id}`, data).then((res) => console.log(res));
   };
 
   return (
     <S.Wrapper>
       <UI.NavigationBar />
-      <UI.SearchEngenine />
-      <UI.CardList />
+      <UI.SearchEngenine handlePostMsg={handlePostMsg} />
+      <UI.CardList handleDelete={handleDelete} handleUpdate={handleUpdate} />
     </S.Wrapper>
   );
 };

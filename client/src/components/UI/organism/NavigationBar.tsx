@@ -5,7 +5,7 @@ import * as UI from '../index';
 /**
  * 상단 네비게이션 바
  */
-const NavigationBar = () => {
+const NavigationBar = (props: any) => {
   return (
     <S.Wrapper>
       <UI.Heading title={'잘지내...?'} />

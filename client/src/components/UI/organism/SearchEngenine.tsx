@@ -5,11 +5,13 @@ import * as UI from '../index';
 /**
  * 검색엔진 컴퍼넌트
  */
-const SearchEngenine = () => {
+const SearchEngenine = (props: any) => {
+  const { handlePostMsg } = props;
+
   return (
     <S.Wrapper>
       <UI.Input hint="search..." />
-      <UI.Button name="POST" />
+      <UI.Button name="POST" handleClick={handlePostMsg} isPreventRender />
     </S.Wrapper>
   );
 };

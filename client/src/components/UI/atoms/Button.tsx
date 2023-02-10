@@ -1,10 +1,16 @@
 import React from 'react';
 
 const Button = (props: any) => {
-  const { name, handleClick } = props;
+  const { name, handleClick, isPreventRender } = props;
   return (
     <>
-      <button onClick={() => handleClick()}>{name}</button>
+      <button
+        onClick={(e) => {
+          isPreventRender && e.preventDefault();
+          handleClick();
+        }}>
+        {name}
+      </button>
     </>
   );
 };
