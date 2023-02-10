@@ -41,13 +41,16 @@ router.get('/:id', (req, res, next) => {
 
 // POST /messages
 router.post('/', (req, res, next) => {
+  console.log(req.body);
   list.push(req.body);
+  console.log(list);
   res.status(200).json('success');
 });
 
 // PUT /messages/:id
 router.put('/:id', (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   const findObj = list.find((el) => el.id === id);
   if (findObj) {
     findObj.text = req.body.text;
@@ -61,6 +64,7 @@ router.put('/:id', (req, res, next) => {
 // DELETE /messages
 router.delete('/:id', (req, res, next) => {
   const id = req.params.id;
+  console.log(id);
   const result = list.filter((data) => data.id !== id);
   res.status(200).json(result);
 });
