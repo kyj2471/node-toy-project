@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import * as UI from 'components/UI';
 
 const Card = (props: any) => {
-  const { el } = props;
+  const { el, handleDelete, handleUpdate } = props;
 
   return (
     <S.Wrapper>
       <UI.Text text={el.username} />
       <UI.Text text={el.text} />
-      <UI.Button name="수정" />
-      <UI.Button name="삭제" />
+      <UI.Button name="수정" handleClick={() => handleUpdate(el.id)} />
+      <UI.Button name="삭제" handleClick={() => handleDelete(el.id)} />
     </S.Wrapper>
   );
 };
