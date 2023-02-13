@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Axios from 'components/libraries/axios';
 import * as UI from 'components/UI';
+import * as API from 'components/api/message';
 
 const Home = () => {
   const [value, setValue] = useState('');
@@ -13,9 +13,9 @@ const Home = () => {
 
   // msg get
   const handleGetMsg = () => {
-    Axios.get('/messages').then((res) => {
-      setList(res.data);
-    });
+    API.getMsg()
+      .then((res) => setList(res.data))
+      .catch((error) => console.error(error));
   };
 
   // msg post
@@ -25,21 +25,19 @@ const Home = () => {
       username: 'tonyK',
       name: 'test'
     };
-    Axios.post('/messages', data).then((res) => {
-      if (res.status === 201) {
+    API.postMsg(data)
+      .then(() => {
+        handleResetValue();
         handleGetMsg();
-      }
-    });
-    handleResetValue();
+      })
+      .catch((error) => console.error(error));
   };
 
   // msg delete
   const handleDelete = (id: any) => {
-    Axios.delete(`/messages/${id}`).then((res) => {
-      if (res.status === 200) {
-        setList(res.data);
-      }
-    });
+    API.deleteMsg(id) //
+      .then((res) => setList(res.data))
+      .catch((error) => console.error(error));
   };
 
   // msg update
@@ -47,15 +45,13 @@ const Home = () => {
     const data = {
       text: 'i dont like this'
     };
-    Axios.put(`messages/${id}`, data)
+    API.updateMsg(id, data)
       .then((res) => {
-        if (res.status === 200) {
-          setList((msg: any) =>
-            msg.map((item: any) => (item.id === res.data.id ? res.data : item))
-          );
-        }
+        setList((msg: any) =>
+          msg.map((item: any) => (item.id === res.data.id ? res.data : item))
+        );
       })
-      .catch((err) => console.error(err));
+      .catch((error) => console.error(error));
   };
 
   // search input value change

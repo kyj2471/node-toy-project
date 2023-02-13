@@ -9,10 +9,7 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === '400') {
-      console.log('???');
-      return;
-    }
+    return Promise.reject(error);
   }
 );
 

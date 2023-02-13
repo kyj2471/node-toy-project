@@ -31,10 +31,15 @@ export const updateMsg = async (req, res, next) => {
   const id = req.params.id;
   const text = req.body.text;
   const result = model.update(id, text);
+  if (typeof id !== number) {
+    res.status(400).json('you wrong');
+  }
   if (result) {
+    console.log('1');
     res.status(200).json(result);
   } else {
-    res.status(400).json('there was an error');
+    console.log('2');
+    res.status(404).json('there was an error');
   }
 };
 
