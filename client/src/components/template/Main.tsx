@@ -26,7 +26,7 @@ const Home = () => {
       name: 'test'
     };
     Axios.post('/messages', data).then((res) => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         handleGetMsg();
       }
     });
