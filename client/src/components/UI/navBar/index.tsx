@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import * as UI from '../index';
 
 /**
  * 상단 네비게이션 바
@@ -37,7 +36,9 @@ const S = {
     display: flex;
     justify-content: space-between;
   `,
-  Tab: styled.div``
+  Tab: styled.div`
+    cursor: pointer;
+  `
 };
 
 export default NavigationBar;

@@ -21,8 +21,8 @@ export const getMessage = async (req, res, next) => {
 
 // create new message
 export const postMsg = async (req, res, next) => {
-  const { text, name, username } = req.body;
-  const newMsg = await model.create(text, name, username);
+  const { text } = req.body;
+  const newMsg = await model.create(text, req.userId);
   res.status(201).json(newMsg);
 };
 

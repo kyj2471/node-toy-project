@@ -3,7 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
-import messagesRouter from './router/messages.js';
+import messages from './router/messages.js';
+import auth from './router/auth.js';
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
 
-app.use('/messages', messagesRouter);
+app.use('/messages', messages);
+app.use('/auth', auth);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

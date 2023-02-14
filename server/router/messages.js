@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { body } from 'express-validator';
 import { validate } from '../middleware/validator.js';
+import { isAuth } from '../middleware/auth.js';
 import * as msgController from '../controller/messages.js';
 
 const router = express.Router();
@@ -16,18 +17,18 @@ const msgValidate = [
 
 // GET /messages
 // GET /messages?username=???
-router.get('/', msgController.getMessages);
+router.get('/', isAuth, msgController.getMessages);
 
 // GET /messages/:id
-router.get('/:id', msgController.getMessage);
+router.get('/:id', isAuth, msgController.getMessage);
 
 // POST /messages
-router.post('/', msgValidate, msgController.postMsg);
+router.post('/', isAuth, msgValidate, msgController.postMsg);
 
 // PUT /messages/:id
-router.put('/:id', msgValidate, msgController.updateMsg);
+router.put('/:id', isAuth, msgValidate, msgController.updateMsg);
 
 // DELETE /messages
-router.delete('/:id', msgController.removeMsg);
+router.delete('/:id', isAuth, msgController.removeMsg);
 
 export default router;
