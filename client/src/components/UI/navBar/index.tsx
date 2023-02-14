@@ -1,17 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 import * as UI from '../index';
 
 /**
  * 상단 네비게이션 바
  */
-const NavigationBar = (props: any) => {
+const NavigationBar = () => {
+  const router = useRouter();
+
+  // handle routing
+  const onLink = (url: string) => {
+    router.push(url);
+  };
+
   return (
     <S.Wrapper>
-      <UI.Heading title={'잘지내...?'} />
+      <S.Title>잘지내...?</S.Title>
       <S.NavBox>
-        <UI.Paragraph text={'login'} />
-        <UI.Paragraph text={'talk'} />
+        <S.Tab onClick={() => onLink('/login')}>login</S.Tab>
+        <S.Tab onClick={() => onLink('/')}>talk</S.Tab>
       </S.NavBox>
     </S.Wrapper>
   );
@@ -28,7 +36,8 @@ const S = {
     width: 30%;
     display: flex;
     justify-content: space-between;
-  `
+  `,
+  Tab: styled.div``
 };
 
 export default NavigationBar;
