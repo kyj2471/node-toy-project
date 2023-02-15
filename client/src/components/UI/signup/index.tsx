@@ -4,7 +4,7 @@ import InputBox from '../form/InputBox';
 import { useInputChange } from 'components/hooks/useInputChange';
 import Submit from '../form/Submit';
 import * as C from 'components/constants/auth';
-import * as API from 'components/api/auth';
+import * as API from 'components/api';
 
 const SignUp = () => {
   const [list, setList] = useState(C.SIGN_UP_INPUT_LIST);

@@ -4,8 +4,8 @@ import 'express-async-errors';
 import * as model from '../data/auth.js';
 
 const jwtSecretKey = '!76Twm*sY@U40RfJa';
-const jwtExpire = '1d';
-const bcryptSalt = 10;
+const jwtExpire = '2d';
+const bcryptSalt = 12;
 
 export const signup = async (req, res, next) => {
   const { username, password, name, email } = req.body;
@@ -31,7 +31,7 @@ export const login = async (req, res, next) => {
     return res.status(401).json({ message: 'invalid user or password' });
   }
   const isValidPasswrod = await bcrypt.compare(password, user.password);
-  if (isValidPasswrod) {
+  if (!isValidPasswrod) {
     return res.status(401).json({ message: 'invalid user or password2' });
   }
   const token = createJwtToken(user.id);
@@ -43,6 +43,7 @@ export const me = async (req, res, next) => {
   if (!user) {
     return res.status(404).json({ message: 'user not found' });
   }
+
   res.status(200).json({ token: req.token, username: user.username });
 };
 

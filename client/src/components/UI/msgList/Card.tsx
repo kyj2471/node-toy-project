@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as UI from 'components/UI';
 
 const Card = (props: any) => {
   const { el, handleUpdate, handleDelete } = props;

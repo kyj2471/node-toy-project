@@ -20,16 +20,20 @@ let list = [
 
 // get all message
 export const getAll = () => {
+  console.log('----sfsfsfsfsdafdsfafdsaf');
   return Promise.all(
     list.map(async (msg) => {
       const { username, name } = await model.findById(msg.userId);
-      return { ...list, username, name };
+      console.log(username);
+      console.log(name);
+      return { ...msg, username, name };
     })
   );
 };
 
 // get message by username
 export const getByUserName = (username) => {
+  console.log('이건아닐거고');
   return getAll().then((messages) =>
     messages.filter((data) => data.username === username)
   );

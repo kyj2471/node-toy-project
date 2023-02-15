@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from './Card';
-import * as API from 'components/api/message';
+import * as API from 'components/api';
 
 /**
  * 카드 리스트 컴퍼넌트(MSG 리스트)

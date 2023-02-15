@@ -6,7 +6,7 @@ import * as API from 'components/api/message';
  * 검색엔진 컴퍼넌트
  */
 const SearchEngenine = (props: any) => {
-  const { handleGetMsg } = props;
+  const { handleGetMsg, name } = props;
   const [value, setValue] = useState('');
 
   // msg post
@@ -14,8 +14,7 @@ const SearchEngenine = (props: any) => {
     e.preventDefault();
     const data = {
       text: value,
-      username: 'tonyK',
-      name: 'test'
+      username: name
     };
     API.postMsg(data)
       .then(() => {
