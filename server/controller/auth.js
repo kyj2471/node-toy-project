@@ -8,9 +8,7 @@ const jwtExpire = '1d';
 const bcryptSalt = 10;
 
 export const signup = async (req, res, next) => {
-  console.log('--------------');
   const { username, password, name, email } = req.body;
-  console.log(req.body);
   const found = await model.findByUsername(username);
   if (found) {
     return res.status(409).json({ message: `${username} exist` });
@@ -22,7 +20,6 @@ export const signup = async (req, res, next) => {
     name,
     email
   });
-  console.log(userId);
   const token = createJwtToken(userId);
   res.status(201).json({ token, username });
 };
@@ -35,7 +32,7 @@ export const login = async (req, res, next) => {
   }
   const isValidPasswrod = await bcrypt.compare(password, user.password);
   if (isValidPasswrod) {
-    return res.status(401).json({ message: 'invalid user or password' });
+    return res.status(401).json({ message: 'invalid user or password2' });
   }
   const token = createJwtToken(user.id);
   res.status(200).json({ token, username });
