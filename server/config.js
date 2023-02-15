@@ -12,5 +12,8 @@ export const config = {
   },
   host: {
     port: process.env.PORT
+  },
+  db: {
+    host: process.env.DB_HOST
   }
 };

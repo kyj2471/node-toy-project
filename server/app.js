@@ -6,6 +6,7 @@ import 'express-async-errors';
 import { config } from './config.js';
 import messages from './router/messages.js';
 import auth from './router/auth.js';
+import { connectDb } from './database/database.js';
 
 const app = express();
 
@@ -26,4 +27,8 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(config.host.port);
+connectDb()
+  .then(() => {
+    app.listen(config.host.port);
+  })
+  .catch(console.error);

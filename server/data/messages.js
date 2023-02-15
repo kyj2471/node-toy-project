@@ -1,4 +1,5 @@
 import * as model from './auth.js';
+import { getMessages } from '../database/database.js';
 
 /**
  * model(data layer)
@@ -20,7 +21,14 @@ let list = [
 
 // get all message
 export const getAll = () => {
-  console.log('----sfsfsfsfsdafdsfafdsaf');
+  return getMessages()
+    .find()
+    .sort({ createdAt: -1 })
+    .toArray()
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
   return Promise.all(
     list.map(async (msg) => {
       const { username, name } = await model.findById(msg.userId);
@@ -50,16 +58,21 @@ export const getById = async (id) => {
 };
 
 // create new message
-export const create = (text, userId) => {
-  console.log(userId);
+export const create = async (text, userId) => {
+  const { name, username } = await model.findById(userId);
   const newData = {
-    id: new Date().toString(),
     text,
     createAt: new Date(),
+    name,
+    username,
     userId
   };
-  list = [newData, ...list];
-  return getById(newData.id);
+  return getMessages()
+    .insertOne()
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
 };
 
 // update message

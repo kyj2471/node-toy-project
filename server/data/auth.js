@@ -1,32 +1,31 @@
-let users = [
-  {
-    id: '1',
-    username: 'tony',
-    password: 'tony0405!',
-    name: 'k',
-    email: 'tony@hellomarket.com'
-  },
-  {
-    id: '2',
-    username: 'chloe',
-    password: 'chloetony',
-    name: 'kyh',
-    email: 'chloe@hellomarket.com'
-  }
-];
+import { getUsers } from '../database/database.js';
+import MongoDb from 'mongodb';
 
 export const findByUsername = async (username) => {
-  return users.find((user) => user.username === username);
+  return getUsers()
+    .findOne({ username: username })
+    .then((data) => {
+      mapOptionalUser(data);
+    });
 };
 
 export const createUser = async (user) => {
-  const created = { ...user, id: Date.now().toString() };
-  users.push(created);
-  console.log(users);
-
-  return created.id;
+  return getUsers()
+    .insertOne(user)
+    .then((data) => {
+      console.log(data);
+      return data.insertedId.toString();
+    });
 };
 
 export const findById = async (id) => {
-  return users.find((user) => user.id === id);
+  return getUsers()
+    .findOne({ _id: new MongoDb.ObjectId(id) })
+    .then((data) => {
+      mapOptionalUser(data);
+    });
+};
+
+const mapOptionalUser = (user) => {
+  return user ? { ...user, id: user._id.toString() } : user;
 };
