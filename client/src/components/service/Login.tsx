@@ -1,9 +1,11 @@
 import React from 'react';
+import * as UI from 'components/UI';
 
 const Login = () => {
   return (
     <>
-      <div>login page</div>
+      <UI.NavBar />
+      <UI.Login />
     </>
   );
 };

@@ -18,6 +18,7 @@ const NavigationBar = () => {
       <S.Title>잘지내...?</S.Title>
       <S.NavBox>
         <S.Tab onClick={() => onLink('/login')}>login</S.Tab>
+        <S.Tab onClick={() => onLink('/signup')}>singup</S.Tab>
         <S.Tab onClick={() => onLink('/')}>talk</S.Tab>
       </S.NavBox>
     </S.Wrapper>
