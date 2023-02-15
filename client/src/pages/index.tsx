@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Main from 'components/template/Main';
+import Talk from 'components/service/Talk';
 
 const Home = () => {
   return (
@@ -10,7 +10,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main />
+      <Talk />
     </>
   );
 };

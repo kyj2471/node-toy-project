@@ -1,3 +1,5 @@
+import * as model from './auth.js';
+
 /**
  * model(data layer)
  */
@@ -5,46 +7,59 @@ let list = [
   {
     id: '1',
     text: '힘을내 영재야',
-    createAt: Date.now().toString(),
-    name: 'K',
-    username: 'KK',
-    url: 'github.com'
+    createAt: new Date().toString(),
+    userId: '1'
   },
   {
     id: '2',
     text: '난 지쳤어',
-    createAt: Date.now().toString(),
-    name: 'yj',
-    username: 'yj'
+    createAt: new Date().toString(),
+    userId: '2'
   }
 ];
 
 // get all message
 export const getAll = () => {
-  return list;
+  console.log('----sfsfsfsfsdafdsfafdsaf');
+  return Promise.all(
+    list.map(async (msg) => {
+      const { username, name } = await model.findById(msg.userId);
+      console.log(username);
+      console.log(name);
+      return { ...msg, username, name };
+    })
+  );
 };
 
 // get message by username
 export const getByUserName = (username) => {
-  return list.filter((data) => data.username === username);
+  console.log('이건아닐거고');
+  return getAll().then((messages) =>
+    messages.filter((data) => data.username === username)
+  );
 };
 
 // get message by user id
-export const getById = (id) => {
-  return list.filter((data) => data.id === id);
+export const getById = async (id) => {
+  const found = list.find((msg) => msg.id === id);
+  if (!found) {
+    return null;
+  }
+  const { username, name } = await model.findById(found.userId);
+  return { ...found, username, name };
 };
 
 // create new message
-export const create = (text, name, username) => {
+export const create = (text, userId) => {
+  console.log(userId);
   const newData = {
-    id: Date.now().toString(),
+    id: new Date().toString(),
     text,
     createAt: new Date(),
-    name,
-    username
+    userId
   };
   list = [newData, ...list];
-  return newData;
+  return getById(newData.id);
 };
 
 // update message
@@ -53,7 +68,7 @@ export const update = (id, text) => {
   if (findObj) {
     findObj.text = text;
   }
-  return findObj;
+  return getById(findObj.id);
 };
 
 // delete message
