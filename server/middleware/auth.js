@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
+import { config } from '../config.js';
 import * as model from '../data/auth.js';
 
 const AUTH_ERROR = { message: 'auth error' };
 
-const SECRET_KEY = '!76Twm*sY@U40RfJa';
+const SECRET_KEY = config.jwt.secretKey;
 
 export const isAuth = async (req, res, next) => {
   const authHeader = req.get('Authorization');

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import InputBox from '../form/InputBox';
-import { useInputChange } from 'components/hooks/useInputChange';
+import { useInputChange } from 'hooks/useInputChange';
 import Submit from '../form/Submit';
-import * as C from 'components/constants/auth';
-import * as API from 'components/api';
+import * as C from 'constants/auth';
+import * as API from 'api';
 
 const Login = () => {
   const [list, setList] = useState(C.LOGIN_INPUT_LIST);

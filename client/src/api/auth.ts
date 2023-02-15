@@ -1,4 +1,4 @@
-import Axios from 'components/libraries/axios';
+import Axios from 'libraries/axios';
 
 export const getMe = async () => {
   return Axios.get('/auth/me');
