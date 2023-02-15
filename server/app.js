@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
+import { config } from './config.js';
 import messages from './router/messages.js';
 import auth from './router/auth.js';
 
@@ -25,4 +26,4 @@ app.use((error, req, res, next) => {
   res.sendStatus(500);
 });
 
-app.listen(8080);
+app.listen(config.host.port);

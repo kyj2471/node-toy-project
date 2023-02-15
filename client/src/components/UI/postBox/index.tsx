@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as API from 'components/api/message';
+import * as API from 'api/message';
 
 /**
  * 검색엔진 컴퍼넌트

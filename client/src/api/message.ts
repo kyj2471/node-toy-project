@@ -1,4 +1,4 @@
-import Axios from 'components/libraries/axios';
+import Axios from 'libraries/axios';
 
 export const getMsg = async () => {
   return Axios.get('/messages');
