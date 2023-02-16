@@ -14,20 +14,20 @@ const Login = () => {
 
   // handle input change logic
   const handleChange = (text: any, id: any) => {
-    const result = useInputChange(list, text, id);
-    setList(result);
+    const _result = useInputChange(list, text, id);
+    setList(_result);
   };
 
   // submit login
   const handleSubmit = () => {
-    const data = {
+    const _data = {
       username: list[0].value,
       password: list[1].value
     };
-    API.postLogin(data)
+    API.postLogin(_data)
       .then((res) => {
-        const token = res.data.token;
-        setCookie('token', token);
+        const _token = res.data.token;
+        setCookie('token', _token);
         onLinkHome();
         onResetValue();
       })

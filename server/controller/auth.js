@@ -10,7 +10,6 @@ export const signup = async (req, res, next) => {
   if (found) {
     return res.status(409).json({ message: `${username} exist` });
   }
-  console.log(typeof config.bcrypt.saltRound);
   const hashed = await bcrypt.hash(password, parseInt(config.bcrypt.saltRound));
   const userId = await model.createUser({
     username,

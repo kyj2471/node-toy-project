@@ -12,11 +12,11 @@ const SearchEngenine = (props: any) => {
   // msg post
   const onPost = (e: React.FormEvent) => {
     e.preventDefault();
-    const data = {
+    const _data = {
       text: value,
       username: name
     };
-    API.postMsg(data)
+    API.postMsg(_data)
       .then(() => {
         handleGetMsg();
         onResetValue();

@@ -1,16 +1,14 @@
 /**
- * controller(business logic)
+ * controller ( data < --- > router )
  */
 import * as model from '../data/messages.js';
 
 // get all message
 export const getMessages = async (req, res) => {
-  console.log(req.headers);
   const username = req.query.username;
   const result = username
     ? await model.getByUserName(username)
     : await model.getAll();
-  console.log(result);
   res.status(200).json(result);
 };
 

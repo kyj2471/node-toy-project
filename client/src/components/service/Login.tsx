@@ -10,6 +10,7 @@ const Login = () => {
     </S.Wrapper>
   );
 };
+
 const S = {
   Wrapper: styled.div`
     max-width: 50%;
