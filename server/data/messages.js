@@ -4,6 +4,7 @@ import * as model from './auth.js';
  * model(data layer)
  */
 let list = [];
+console.log(list);
 
 // get all message
 export const getAll = () => {

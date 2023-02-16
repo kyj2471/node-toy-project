@@ -1,5 +1,5 @@
 /**
- * controller(business logic)
+ * controller ( data < --- > router )
  */
 import * as model from '../data/messages.js';
 
