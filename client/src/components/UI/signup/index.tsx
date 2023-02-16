@@ -12,19 +12,19 @@ const SignUp = () => {
 
   // handle input change logic
   const handleChange = (text: any, id: any) => {
-    const result = useInputChange(list, text, id);
-    setList(result);
+    const _result = useInputChange(list, text, id);
+    setList(_result);
   };
 
   // signup submit
   const handleSubmit = () => {
-    const data = {
+    const _data = {
       name: list[0].value,
       password: list[1].value,
       username: list[2].value,
       email: list[3].value
     };
-    API.postSignUp(data)
+    API.postSignUp(_data)
       .then(() => {
         router.push('/login');
         onResetValue();

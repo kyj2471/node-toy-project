@@ -11,10 +11,10 @@ const CardList = (props: any) => {
 
   // msg update
   const handleUpdate = (id: string, value: string) => {
-    const data = {
+    const _data = {
       text: value
     };
-    API.updateMsg(id, data)
+    API.updateMsg(id, _data)
       .then(() => handleGetMsg())
       .catch(console.error);
   };

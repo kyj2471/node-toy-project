@@ -3,29 +3,13 @@ import * as model from './auth.js';
 /**
  * model(data layer)
  */
-let list = [
-  {
-    id: '1',
-    text: '힘을내 영재야',
-    createAt: new Date().toString(),
-    userId: '1'
-  },
-  {
-    id: '2',
-    text: '난 지쳤어',
-    createAt: new Date().toString(),
-    userId: '2'
-  }
-];
+let list = [];
 
 // get all message
 export const getAll = () => {
-  console.log('----sfsfsfsfsdafdsfafdsaf');
   return Promise.all(
     list.map(async (msg) => {
       const { username, name } = await model.findById(msg.userId);
-      console.log(username);
-      console.log(name);
       return { ...msg, username, name };
     })
   );
@@ -33,7 +17,6 @@ export const getAll = () => {
 
 // get message by username
 export const getByUserName = (username) => {
-  console.log('이건아닐거고');
   return getAll().then((messages) =>
     messages.filter((data) => data.username === username)
   );
@@ -51,7 +34,6 @@ export const getById = async (id) => {
 
 // create new message
 export const create = (text, userId) => {
-  console.log(userId);
   const newData = {
     id: new Date().toString(),
     text,

@@ -15,7 +15,7 @@ const NavigationBar = () => {
 
   return (
     <S.Wrapper>
-      <S.Title>잘지내...?</S.Title>
+      <S.Title>TEST</S.Title>
       <S.NavBox>
         <S.Tab onClick={() => onLink('/login')}>login</S.Tab>
         <S.Tab onClick={() => onLink('/signup')}>singup</S.Tab>
